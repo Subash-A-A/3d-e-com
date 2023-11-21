@@ -1,0 +1,11 @@
+<group position={[0, -10, -30]}>
+        <mesh
+          rotation={[0, 0, Math.PI / 4]}
+          scale={[1, 1, 1]}
+          position={[0, 10, -30]}
+        >
+          <circleGeometry args={[7, 128, 0, Math.PI * 2]} />
+          <meshBasicMaterial color={"#FEFFAC"} />
+        </mesh>
+        {/* <Emily /> */}
+      </group>
