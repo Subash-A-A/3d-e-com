@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Window } from "./Window";
 import { Graffiti } from "./Graffiti";
-import gsap from "gsap";
 import {
   Bloom,
   DepthOfField,
@@ -17,12 +16,10 @@ const lerp = (a, b, alpha) => {
 };
 
 const Experience = () => {
-  const [pointerMotion, setPointerMotion] = useState(false);
   const { camera, pointer } = useThree();
 
   const emily = useRef(null);
   useFrame((state, delta) => {
-    if (!pointerMotion) return;
     emily.current.position.x = lerp(
       emily.current.position.x,
       -pointer.x * 0.025,
@@ -73,18 +70,6 @@ const Experience = () => {
       emily.current.position.y = 0.325;
     }
   });
-  useEffect(() => {
-    setPointerMotion(false);
-    gsap
-      .fromTo(
-        camera.position,
-        { x: 0, z: 0 },
-        { x: 0, z: 5, duration: 0.5, delay: 2, ease: "power4.out" }
-      )
-      .then(() => {
-        setPointerMotion(true);
-      });
-  }, []);
 
   return (
     <>
@@ -99,6 +84,7 @@ const Experience = () => {
         />
         <Window />
       </group>
+
       <EffectComposer>
         <DepthOfField
           focusDistance={0}
